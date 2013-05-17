@@ -7,4 +7,3 @@ Options FollowSymLinks
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
-

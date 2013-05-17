@@ -7,6 +7,7 @@ class UserController extends Controller {
   }
 
   public function showHomePage() {
+      echo 'phuck';
     // TODO
   }
 
