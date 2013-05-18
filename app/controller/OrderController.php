@@ -27,9 +27,9 @@ class OrderController extends Controller {
         $app->redirect($app->urlFor('orders'));
     }
 
-    public function pull($uid) {
-        $user = new User($uid);
-        if ($user->getType() == 0)
+    public function pull($token) {
+        $user = parent::getUserFromToken($token);
+        if (!isset($user) || $user->getType() == 0)
             $ret = array('status' => 'failed', 'reason' => 'Invalid deliverer token');
         else {
             $db = fORMDatabase::retrieve();
@@ -37,7 +37,7 @@ class OrderController extends Controller {
             $res = $db->query($statement, $user->getId());
 
             if ($res->countReturnedRows() == 0)
-                $gid = $this->newGroup($uid);
+                $gid = $this->newGroup($user->getId());
             else
                 $gid = $res->fetchScalar();
 
@@ -84,6 +84,37 @@ class OrderController extends Controller {
                 'status' => $status));
         }
         return $ret;
+    }
+
+    public function confirm($token, $oid) {
+        $user = parent::getUserFromToken($token);
+        if (!isset($user) || $user->getType() == 0)
+            $ret = array('status' => 'failed', 'reason' => 'Invalid deliverer token');
+        else {
+            try {
+                $order = new Order($oid);
+
+                $res = fRecordSet::build('Group',
+                    array('groups.id=' => $order->getGid())
+                );
+
+                if ($res[0]->getUid() != $user->getId())
+                    $ret = array('status' => 'failed', 'reason' => 'You are not responsible for that order');
+                else {
+                    if ($order->getStatus() == 2)
+                        $ret = array('status' => 'failed', 'reason' => 'That order has already been delivered');
+                    else {
+                        $order->setStatus(2);
+                        $order->store();
+                        $ret = array('status' => 'ok');
+                    }
+                }
+            } catch (fExpectedException $e) {
+                $ret = array('status' => 'failed', 'reason' => 'Invalid order id');
+            }
+        }
+
+        Controller::ajaxReturn($ret);
     }
 }
 ?>

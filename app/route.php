@@ -56,18 +56,24 @@ $app->post('/orders/', 'authenticate', function() use ($app) {
     $controller->addOrder($req->post('description'), $req->post('address'), $req->post('phone'));
 })->name('orders');
 
-$app->get('/deliver/:id/pull/', function($id) use ($app) {
+$app->get('/deliver/:token/pull/', function($token) {
     require_once(__DIR__.'/controller/OrderController.php');
-    $req = $app->request();
 
     $controller = new OrderController();
-    $controller->pull($id);
+    $controller->pull($token);
 });
 
-$app->get('/order/:id', 'authenticate', function($id) use ($app) {
+$app->get('/order/:oid', 'authenticate', function($oid) use ($app) {
     require_once(__DIR__.'/controller/OrderController.php');
 
     $controller = new OrderController();
 })->name('order');
+
+$app->get('/deliver/:token/order/:oid/confirm/', function($token, $oid) {
+    require_once(__DIR__.'/controller/OrderController.php');
+
+    $controller = new OrderController();
+    $controller->confirm($token, $oid);
+});
 
 $app->run();
