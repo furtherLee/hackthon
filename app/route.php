@@ -56,4 +56,18 @@ $app->post('/orders/', 'authenticate', function() use ($app) {
     $controller->addOrder($req->post('description'), $req->post('address'), $req->post('phone'));
 })->name('orders');
 
+$app->get('/deliver/:id/pull/', function($id) use ($app) {
+    require_once(__DIR__.'/controller/OrderController.php');
+    $req = $app->request();
+
+    $controller = new OrderController();
+    $controller->pull($id);
+});
+
+$app->get('/order/:id', 'authenticate', function($id) use ($app) {
+    require_once(__DIR__.'/controller/OrderController.php');
+
+    $controller = new OrderController();
+})->name('order');
+
 $app->run();
