@@ -1,5 +1,4 @@
 <?php
-
 class Controller{
   private static $global_context = array(
 					 "HOST_URL" => HOST_URL,
@@ -28,3 +27,4 @@ class Controller{
   }
 
 }
+?>

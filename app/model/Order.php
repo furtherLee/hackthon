@@ -1,5 +1,5 @@
 <?php
-class User extends fActiveRecord {
+class Order extends fActiveRecord {
     protected function configure() {
     }
 }
