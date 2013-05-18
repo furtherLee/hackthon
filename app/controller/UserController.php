@@ -1,9 +1,8 @@
 <?php
 
 class UserController extends Controller {
-
     public function showLogInPage(){
-        // TODO
+        require_once(__DIR__.'/../template/login.php');
     }
 
     public function showHomePage() {
@@ -23,5 +22,7 @@ class UserController extends Controller {
     private function showDashBoard() {
         // TODO
     }
-}
 
+    private function login($user, $pass) {
+    }
+}

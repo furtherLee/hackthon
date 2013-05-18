@@ -25,10 +25,11 @@ $app->get('/login/', function() {
     $controller->showLogInPage();
 });
 
-$app->post('/login/', function() {
+$app->post('/login/', function() use ($app) {
     require_once(__DIR__.'/controller/UserController.php');
+    $req = $app->request();
     $controller = new UserController();
-    $controller->login($request.post('email'), $request.post('password'));
+    $controller->login($req->post('email'), $req->post('password'));
 });
 
 $app->run();
