@@ -27,6 +27,7 @@ create table if not exists `orders` (
     `time` timestamp not null default current_timestamp,
     `description` text,
     `address` text not null,
+    `phone` text not null,
     `status` int not null,
     `gid` int,
     foreign key (`gid`) references `groups`(`id`)
