@@ -104,7 +104,7 @@ class OrderController extends Controller {
             $u = new User($order->getUid());
             $name = $u->getName();
             array_push($ret, array('id' => $order->getId(),
-                'time' => $order->getTime()->format('c'),
+                'time' => $order->getTime()->format('U'),
                 'description' => $order->getDescription(),
                 'address' => $order->getAddress(),
                 'phone' => $order->getPhone(),
