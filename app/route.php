@@ -1,35 +1,59 @@
 <?php
 
-$authenticateForRole = function ( $role = 'member' ) {
-    return function () use ( $role ) {
-#        $user = User::fetchFromDatabaseSomehow();
-#        if ( $user->belongsToRole($role) === false ) {
-#            $app = \Slim\Slim::getInstance();
-#            $app->flash('error', 'Login required');
-#            $app->redirect('/login');
-#        }
+$authenticate = function () {
+    return function () {
+        if (!fAuthorization::checkLoggedIn()) {
+            $app = \Slim\Slim::getInstance();
+            $app->redirect($app->urlFor('user_login'));
+        }
     };
 };
 
 $app = new Slim();
 
-$app->get('/', $authenticateForRole('admin'), function() {
+$app->get('/', $authenticate, function() {
     require_once(__DIR__.'/controller/UserController.php');
     $controller = new UserController();
     $controller->showHomePage();
-});
+})->name('base');
 
-$app->get('/login/', function() {
+$app->get('/user/login/', function() {
     require_once(__DIR__.'/controller/UserController.php');
     $controller = new UserController();
     $controller->showLogInPage();
 });
 
-$app->post('/login/', function() use ($app) {
+$app->get('/user/logout/', function() use ($app) {
+    fAuthorization::destroyUserInfo();
+    $app->redirect($app->urlFor('base'));
+});
+
+$app->post('/user/login/', function() use ($app) {
     require_once(__DIR__.'/controller/UserController.php');
     $req = $app->request();
     $controller = new UserController();
-    $controller->login($req->post('email'), $req->post('password'));
+
+    $ret = $controller->login(0, $req->post('email'), $req->post('password'));
+    if (false == $ret) {
+        $app->redirect($app->urlFor('user_login'));
+    } else {
+        fAuthorization::setUserAuthLevel('user');
+        fAuthorization::setUserToken($ret);
+        $app->redirect($app->urlFor('base'));
+    }
+})->name('user_login');
+
+$app->post('/deliver/login/', function() use ($app) {
+    require_once(__DIR__.'/controller/UserController.php');
+    $req = $app->request();
+    $controller = new UserController();
+
+    $id = $controller->login(1, $req->post('email'), $req->post('password'));
+    if (false == $id)
+        $ret = array('status' => 'failed', 'reason' => 'sign-in failed');
+    else
+        $ret = array('status' => 'ok', 'result' => array('id' => $id));
+    ajaxReturn($ret);
 });
 
 $app->run();

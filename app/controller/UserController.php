@@ -6,13 +6,7 @@ class UserController extends Controller {
     }
 
     public function showHomePage() {
-        $res = fRecordSet::build('User',
-            array('users.email=' => 'user1@user1')
-        );
-
-        foreach ($res as $record) {
-            echo $record->getEmail();
-        }
+        echo 'logged in as ' . parent::getUser()->getName();
     }
 
     private function showAdminPage() {
@@ -23,6 +17,20 @@ class UserController extends Controller {
         // TODO
     }
 
-    private function login($user, $pass) {
+    function login($type, $user, $pass) {
+        if (!isset($user) || !isset($pass))
+            return false;
+
+        $res = fRecordSet::build('User',
+            array('users.email=' => $user, 'users.pass=' => md5($pass))
+        );
+
+        if (count($res) == 0)
+            return false;
+
+        if ($res[0]->getType() == $type)
+            return $res[0]->getId();
+        else
+            return false;
     }
 }
