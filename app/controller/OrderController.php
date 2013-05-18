@@ -10,6 +10,15 @@ class OrderController extends Controller {
         require_once(__DIR__.'/../template/orders.php');
     }
 
+    public function showOrder($oid) {
+        $user = parent::getUser();
+
+        try {
+            $order = new Order($oid);
+        } catch (fExpectedException $e) {
+        }
+    }
+
     public function addOrder($desc, $addr, $phone) {
         if (isset($addr) && !empty($addr) && isset($phone) && !empty($phone)) {
             $user = parent::getUser();
@@ -41,7 +50,8 @@ class OrderController extends Controller {
             else
                 $gid = $res->fetchScalar();
 
-            $ret = $this->getOrderList($gid);
+            $ret = array('status' => 'ok', 'result' => $this->getOrderList($gid));
+
         }
         Controller::ajaxReturn($ret);
     }
@@ -72,16 +82,19 @@ class OrderController extends Controller {
         $ret = array();
         foreach ($res as $order) {
             if ($order->getStatus() == 2)
-                $status = 'Finished';
+                $status = 'sent';
             else
-                $status = 'Pending';
+                $status = 'pending';
+            $u = new User($order->getUid());
+            $name = $u->getName();
             array_push($ret, array('id' => $order->getId(),
                 'time' => $order->getTime()->format('c'),
                 'description' => $order->getDescription(),
                 'address' => $order->getAddress(),
                 'phone' => $order->getPhone(),
-                'name' => parent::getUser($order->getUid())->getName(),
-                'status' => $status));
+                'name' => $name,
+                'status' => $status,
+                'gid' => $gid));
         }
         return $ret;
     }

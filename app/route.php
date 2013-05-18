@@ -67,6 +67,7 @@ $app->get('/order/:oid', 'authenticate', function($oid) use ($app) {
     require_once(__DIR__.'/controller/OrderController.php');
 
     $controller = new OrderController();
+    $controller->showOrder($oid);
 })->name('order');
 
 $app->post('/deliver/:token/order/:oid/confirm/', function($token, $oid) {
