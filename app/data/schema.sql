@@ -33,9 +33,10 @@ create table if not exists `orders` (
     foreign key (`gid`) references `groups`(`id`)
 );
 
-insert into users (name, email, pass, type) values ('user1', 'user1@user1', md5('user1'), 0);
-insert into users (name, email, pass, type) values ('user2', 'user2@user2', md5('user2'), 0);
-insert into users (name, email, pass, type) values ('deliverer1', 'deliverer1@deliverer1', md5('deliverer1'), 1);
+insert into users (name, email, pass, type) values ('李诗剑', 'u1@u', md5('u1'), 0);
+insert into users (name, email, pass, type) values ('瞿钧', 'u2@u', md5('u2'), 0);
+insert into users (name, email, pass, type) values ('王孟晖', 'u3@u', md5('u3'), 0);
+insert into users (name, email, pass, type) values ('贾枭', 'd1@d', md5('d1'), 1);
 
 create user 'hacker_dev'@'localhost' identified by 'hacker_dev';
 grant all privileges on hacker.* to 'hacker_dev'@'localhost' with grant option;

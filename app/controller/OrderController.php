@@ -13,10 +13,26 @@ class OrderController extends Controller {
     public function showOrder($oid) {
         $user = parent::getUser();
 
+        $fail = false;
         try {
             $order = new Order($oid);
+            if ($order->getUid() != $user->getId())
+                $fail = true;
+            else {
+                $orderList = array();
+                $gid = $order->getGid();
+                if (isset($gid))
+                    $orderList = $this->getOrderList($gid);
+            }
         } catch (fExpectedException $e) {
+            $fail = true;
         }
+
+        $app = Slim::getInstance();
+        if ($fail)
+            $app->redirect($app->urlFor('orders'));
+        else
+            require_once(__DIR__.'/../template/order.php');
     }
 
     public function addOrder($desc, $addr, $phone) {

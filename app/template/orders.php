@@ -6,13 +6,22 @@
         <div>
             <h2>My orders</h2>
 <?php
+    $app = Slim::getInstance();
     if (count($res) == 0)
         echo "You don't have any orders yet.";
     else {
         echo '<ul>';
             foreach ($res as $order) {
+                if ($order->getStatus() == 2)
+                    $status = 'Delivered';
+                else if ($order->getStatus() == 1)
+                    $status = 'Delivering';
+                else
+                    $status = 'Pending';
+                $link = $app->urlFor('order', array('oid' => $order->getId()));
                 echo <<<c
-                <p>ID: {$order->getId()}, {$order->getTime()}</p>
+                <p>ID: <a href="{$link}">{$order->getId()}</a>, {$order->getTime()}</p>
+                <p>Status: {$status}</p>
                 <p>{$order->getDescription()}</p>
                 <p>{$order->getAddress()}</p>
                 <p>{$order->getPhone()}</p>
