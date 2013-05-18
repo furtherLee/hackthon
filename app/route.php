@@ -1,8 +1,19 @@
 <?php
 
+$authenticateForRole = function ( $role = 'member' ) {
+    return function () use ( $role ) {
+#        $user = User::fetchFromDatabaseSomehow();
+#        if ( $user->belongsToRole($role) === false ) {
+#            $app = \Slim\Slim::getInstance();
+#            $app->flash('error', 'Login required');
+#            $app->redirect('/login');
+#        }
+    };
+};
+
 $app = new Slim();
 
-$app->get('/', function() {
+$app->get('/', $authenticateForRole('admin'), function() {
     require_once(__DIR__.'/controller/UserController.php');
     $controller = new UserController();
     $controller->showHomePage();
@@ -14,28 +25,10 @@ $app->get('/login/', function() {
     $controller->showLogInPage();
 });
 
-$app->post('/submit/', function() {
-    require_once(__DIR__.'/controller/SubmitController.php');
-    $controller = new SubmitController();
-    $controller->submit();
-});
-
-$app->post('/review/:id/ask/', function($id) {
-    require_once(__DIR__.'/controller/ReviewController.php');
-    $controller = new ReviewController();
-    $controller->ask($id);
-});
-
-$app->post('/review/:id/answer/', function($id) {
-    require_once(__DIR__.'/controller/ReviewController.php');
-    $controller = new ReviewController();
-    $controller->answer($id);
-});
-
-$app->post('/review/:id/answer/', function($id) {
-    require_once(__DIR__.'/controller/ReviewController.php');
-    $controller = new ReviewController();
-    $controller->score($id);
+$app->post('/login/', function() {
+    require_once(__DIR__.'/controller/UserController.php');
+    $controller = new UserController();
+    $controller->login($request.post('email'), $request.post('password'));
 });
 
 $app->run();

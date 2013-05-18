@@ -2,21 +2,26 @@
 
 class UserController extends Controller {
 
-  public function showLogInPage(){
-    // TODO
-  }
+    public function showLogInPage(){
+        // TODO
+    }
 
-  public function showHomePage() {
-      echo 'phuck';
-    // TODO
-  }
+    public function showHomePage() {
+        $res = fRecordSet::build('User',
+            array('users.email=' => 'user1@user1')
+        );
 
-  private function showAdminPage() {
-    // TODO
-  }
+        foreach ($res as $record) {
+            echo $record->getEmail();
+        }
+    }
 
-  private function showDashBoard() {
-    // TODO
-  }
+    private function showAdminPage() {
+        // TODO
+    }
+
+    private function showDashBoard() {
+        // TODO
+    }
 }
 
