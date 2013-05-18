@@ -26,8 +26,8 @@ c;
             <h2>Create new order</h2>
             <form method="post">
                 <p><label for="description">Description: </label><input id="description" type="text" name="description" /></p>
-                <p><label for="address">Address: </label><input id="address" type="password" name="address" /></p>
-                <p><label for="phone">Phone: </label><input id="phone" type="phone" name="phone" /></p>
+                <p><label for="address">Address: </label><input id="address" type="text" name="address" /></p>
+                <p><label for="phone">Phone: </label><input id="phone" type="text" name="phone" /></p>
                 <input type="submit" value="Submit" />
             </form>
         </div>
