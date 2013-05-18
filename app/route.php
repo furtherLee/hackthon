@@ -33,14 +33,7 @@ $app->post('/user/login/', function() use ($app) {
     $req = $app->request();
     $controller = new UserController();
 
-    $ret = $controller->login(0, $req->post('email'), $req->post('password'));
-    if (false == $ret) {
-        $app->redirect($app->urlFor('user_login'));
-    } else {
-        fAuthorization::setUserAuthLevel('user');
-        fAuthorization::setUserToken($ret);
-        $app->redirect($app->urlFor('base'));
-    }
+    $controller->login(0, $req->post('email'), $req->post('password'));
 })->name('user_login');
 
 $app->post('/deliver/login/', function() use ($app) {
@@ -48,12 +41,7 @@ $app->post('/deliver/login/', function() use ($app) {
     $req = $app->request();
     $controller = new UserController();
 
-    $id = $controller->login(1, $req->post('email'), $req->post('password'));
-    if (false == $id)
-        $ret = array('status' => 'failed', 'reason' => 'sign-in failed');
-    else
-        $ret = array('status' => 'ok', 'result' => array('id' => $id));
-    ajaxReturn($ret);
+    $controller->login(1, $req->post('email'), $req->post('password'));
 });
 
 $app->run();
