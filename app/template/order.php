@@ -14,7 +14,7 @@
     echo <<<c
         <p>Id: {$order->getId()}</p>
         <p>Status: {$status}</p>
-        <p>Address: {$order->getAddress}</p>
+        <p>Address: {$order->getAddress()}</p>
 c;
     if (count($orderList) > 0) {
         echo '<ul>';
