@@ -19,6 +19,12 @@ $app->get('/user/login/', function() {
     $controller->showLogInPage();
 });
 
+$app->get('/about/', function() {
+    require_once(__DIR__.'/controller/UserController.php');
+    $controller = new OrderController();
+    $controller->showAbout();
+});
+
 $app->get('/user/logout/', function() use ($app) {
     fAuthorization::destroyUserInfo();
     $app->redirect($app->urlFor('base'));

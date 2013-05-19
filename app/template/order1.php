@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>外卖哥 - 订单详情</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -31,10 +31,14 @@
                                    <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
 
+<?php
+  if (isset($deliverer))
+    echo "<p>外卖小哥：{$deliverer}</p>";
+  else
+    echo "<p>还未分配外卖小哥。</p>"
+?>
+
   <body>
-
-
-
       <table class="table">
 <?php
       if (count($orderList) > 0) {
