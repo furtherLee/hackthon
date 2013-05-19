@@ -7,7 +7,7 @@ class OrderController extends Controller {
             array('orders.uid=' => $user->getId()),
             array('orders.time' => 'desc')
         );
-        require_once(__DIR__.'/../template/orders.php');
+        require_once(__DIR__.'/../template/orders1.php');
     }
 
     public function showOrder($oid) {
@@ -32,7 +32,7 @@ class OrderController extends Controller {
         if ($fail)
             $app->redirect($app->urlFor('orders'));
         else
-            require_once(__DIR__.'/../template/order.php');
+            require_once(__DIR__.'/../template/order1.php');
     }
 
     public function addOrder($desc, $addr, $phone) {

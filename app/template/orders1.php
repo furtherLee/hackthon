@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/hackthon/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 20px;
@@ -22,6 +22,11 @@
       }
       .container-narrow > hr {
         margin: 30px 0;
+      }
+
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
       }
 
       /* Main marketing message and sign up button */
@@ -114,7 +119,7 @@
         border-radius: 4px 0 4px 0;
       }
     </style>
-    <link href="/hackthon/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -157,30 +162,46 @@
 
 
 
-      <div class="jumbotron">
-        <h2>新建一个外卖订单</h2>
-        <br>
-        <form class="form-horizontal" method="post">
-          <div class="control-group">
-            <label class="control-label" for="description">订单描述</label>
-            <div class="controls">
-              <input class="input-xxlarge" type="text" id="description" name="description">
-            </div>
+      <div class="hero-unit">
+        <h2>欢迎来到外卖哥</h2>
+<?php
+        echo "<p>你已经点了", count($res), "份外卖了哦，请再接再厉！</p>";
+?>
+
+        <!-- Button to trigger modal -->
+        <a href="#neworder" role="button" class="btn" data-toggle="modal">再叫一份外卖</a>
+     
+        <!-- Modal -->
+        <div id="neworder" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <h3 id="myModalLabel">新建订单</h3>
           </div>
-          <div class="control-group" for="address">
-            <label class="control-label">送餐地址</label>
-            <div class="controls">
-              <input class="input-xxlarge" type="text" id="address" name="address">
-            </div>
+          <div class="modal-body">
+            <form id="modal-form" class="form-horizontal" method="post">
+              <div class="control-group">
+                <label class="control-label" for="description">订单描述</label>
+                <div class="controls">
+                  <input class="input-xlarge" type="text" id="description" name="description">
+                </div>
+              </div>
+              <div class="control-group" for="address">
+                <label class="control-label">送餐地址</label>
+                <div class="controls">
+                  <input class="input-xlarge" type="text" id="address" name="address">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="phone">联系电话</label>
+                <div class="controls">
+                  <input class="input-xlarge" type="text" id="phone" name="phone">
+                </div>
+              </div>
+            </form>
           </div>
-          <div class="control-group">
-            <label class="control-label" for="phone">联系电话</label>
-            <div class="controls">
-              <input class="input-xxlarge" type="text" id="phone" name="phone">
-            </div>
+          <div class="modal-footer">
+            <button id="modal-submit" class="btn" data-dismiss="modal" aria-hidden="true">提交</button>
           </div>
-          <button type="submit" class="btn">提交</button>
-        </form>
+        </div>
       </div>
 
       <hr>
@@ -190,7 +211,7 @@
           <a name="onroad"></a>
 <?php
     if (count($res) == 0)
-      echo "<h4>You don't have any orders yet.</h4>";
+      echo "<h4>你还没有任何订单。</h4>";
     else {
       foreach ($res as $order) {
         if ($order->getStatus() < 2) {
@@ -203,10 +224,12 @@
         <a data-toggle="modal" class="btn" href="../order/{$order->getId()}" data-target="#myModal">查看详情</a>
         <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">订单详情</h3>
           </div>
           <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
           </div>
         </div>
         </form>
@@ -225,12 +248,14 @@ c;
         <p>送餐地址：{$order->getAddress()}</p>
         <p>联系电话：{$order->getPhone()}</p>
         <a data-toggle="modal" class="btn" href="../order/{$order->getId()}" data-target="#myModal">查看详情</a>
-        <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal hide fade" id="modal-view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">订单详情</h3>
           </div>
           <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
           </div>
         </div>
         </form>
@@ -253,8 +278,24 @@ c;
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/hackthon/assets/js/jquery.js"></script>
-    <script src="/hackthon/assets/js/bootstrap.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
+    <script type="text/javascript">
+      $('#modal-submit').on('click', function(e){
+        // We don't want this to act as a link so cancel the link action
+        e.preventDefault();
 
+        // Find form and submit it
+        $('#modal-form').submit();
+      });
+    </script>
+    <script type="text/javascript">
+      $('#model-view').on('click', function(e){
+        // We don't want this to act as a link so cancel the link action
+        e.preventDefault();
+
+        // Find form and submit it
+      });
+    </script>
   </body>
 </html>

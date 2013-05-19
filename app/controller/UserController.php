@@ -1,11 +1,20 @@
 <?php
+
 class UserController extends Controller {
     public function showLogInPage(){
-        require_once(__DIR__.'/../template/login.php');
+        require_once(__DIR__.'/../template/login1.php');
     }
 
     public function showHomePage() {
         echo 'logged in as ' . parent::getUser()->getName();
+    }
+
+    private function showAdminPage() {
+        // TODO
+    }
+
+    private function showDashBoard() {
+        // TODO
     }
 
     private function checkCredentials($type, $user, $pass) {
@@ -46,4 +55,3 @@ class UserController extends Controller {
         }
     }
 }
-?>

@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/hackthon/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../../assets/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 40px;
@@ -42,7 +42,7 @@
       }
 
     </style>
-    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../assets/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -61,23 +61,31 @@
 
     <div class="container">
 
-      <form class="form-signin" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
+      <form class="form-signin span4" method="post">
+        <h2 class="form-signin-heading">请登录</h2>
         <input type="text" name="email" class="input-block-level" placeholder="Email address">
         <input type="password" name="password" class="input-block-level" placeholder="Password">
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+        <button class="btn btn-large btn-primary" type="submit">提交</button>
+        <br>
+        <br>
+        <a href="#" class="thumbnail span1">
+          <img alt="100x30" style="width: 100px; height: 30px;" src="../../assets/img/appdown.png" alt="">
+        </a>
       </form>
+
+      <div class="span4">
+        <a href="#" class="thumbnail">
+          <img style="width: 500px; height: 305px;" src="../../assets/img/logo.jpg" alt="">
+        </a>
+      </div>
 
     </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/hackthon/assets/js/jquery.js"></script>
-    <script src="/hackthon/assets/js/bootstrap.js"></script>
+    <script src="../../assets/js/jquery.js"></script>
+    <script src="../../assets/js/bootstrap.js"></script>
 
   </body>
 </html>
