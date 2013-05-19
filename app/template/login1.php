@@ -9,6 +9,7 @@
 
     <!-- Le styles -->
     <link href="../../assets/css/bootstrap.css" rel="stylesheet">
+
     <style type="text/css">
       body {
         padding-top: 40px;
@@ -43,6 +44,7 @@
 
     </style>
     <link href="../../assets/css/bootstrap-responsive.css" rel="stylesheet">
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -79,6 +81,7 @@
         </a>
       </div>
 
+
     </div> <!-- /container -->
 
     <!-- Le javascript
@@ -86,6 +89,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../../assets/js/jquery.js"></script>
     <script src="../../assets/js/bootstrap.js"></script>
+
 
   </body>
 </html>
