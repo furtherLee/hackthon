@@ -8,11 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-<<<<<<< HEAD
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
-=======
-    <link href="/hackthon/assets/css/bootstrap.css" rel="stylesheet">
->>>>>>> 2ab851ac8127551e7a067cdffd50ca43542e7ebd
     <style type="text/css">
       body {
         padding-top: 20px;
@@ -28,14 +24,11 @@
         margin: 30px 0;
       }
 
-<<<<<<< HEAD
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
 
-=======
->>>>>>> 2ab851ac8127551e7a067cdffd50ca43542e7ebd
       /* Main marketing message and sign up button */
       .jumbotron {
         margin: 60px 0;
@@ -126,11 +119,8 @@
         border-radius: 4px 0 4px 0;
       }
     </style>
-<<<<<<< HEAD
     <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
-=======
-    <link href="/hackthon/assets/css/bootstrap-responsive.css" rel="stylesheet">
->>>>>>> 2ab851ac8127551e7a067cdffd50ca43542e7ebd
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
