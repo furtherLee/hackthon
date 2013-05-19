@@ -9,10 +9,8 @@ function authenticate() {
 
 $app = new Slim();
 
-$app->get('/', 'authenticate', function() {
-    require_once(__DIR__.'/controller/UserController.php');
-    $controller = new UserController();
-    $controller->showHomePage();
+$app->get('/', 'authenticate', function() use ($app) {
+    $app->redirect($app->urlFor('orders'));
 })->name('base');
 
 $app->get('/user/login/', function() {

@@ -7,7 +7,7 @@ define("DB_USER", "hacker_dev");
 define("DB_PASS", "hacker_dev");
 define("DB_HOST", "localhost");
 
-define("HOST_URL", "http://localhost/~mhwang/hacker");
+define("HOST_URL", "http://localhost/hackthon");
 define("SITE_TITLE", "Takeouts monitor");
 
 define("SESSION_PATH", "/tmp/sessions/");
