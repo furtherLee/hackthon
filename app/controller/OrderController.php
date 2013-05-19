@@ -1,5 +1,12 @@
 <?php
 class OrderController extends Controller {
+
+    public function showAbout() {
+        $user = parent::getUser();
+        require_once(__DIR__.'/../template/about.php');
+    }
+
+    
     public function showOrders() {
         $user = parent::getUser();
 
@@ -21,8 +28,12 @@ class OrderController extends Controller {
             else {
                 $orderList = array();
                 $gid = $order->getGid();
-                if (isset($gid))
+                if (isset($gid)) {
                     $orderList = $this->getOrderList($gid);
+                    $group = new Group($gid);
+                    $deliverer = new User($group->getUid());
+                    $deliverer = $deliverer->getName();
+                }
             }
         } catch (fExpectedException $e) {
             $fail = true;
@@ -81,10 +92,15 @@ class OrderController extends Controller {
             array('orders.status=' => 0)
         );
 
+        $c = 0;
         foreach ($res as $order) {
             $order->setStatus(1);
             $order->setGid($group->getId());
             $order->store();
+            ++$c;
+
+            if ($c >= 5)
+                break;
         }
 
         return $group->getId();

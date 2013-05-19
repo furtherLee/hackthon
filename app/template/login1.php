@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sign in &middot; Twitter Bootstrap</title>
+    <title>外卖哥 - 登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -63,27 +63,27 @@
 
     <div class="container">
 
-      <form class="form-signin span4" method="post">
+      <form class="form-signin span4 offset2" method="post">
         <h2 class="form-signin-heading">请登录</h2>
         <input type="text" name="email" class="input-block-level" placeholder="Email address">
         <input type="password" name="password" class="input-block-level" placeholder="Password">
         <button class="btn btn-large btn-primary" type="submit">提交</button>
-        <br>
-        <br>
-        <a href="#" class="thumbnail span1">
-          <img alt="100x30" style="width: 100px; height: 30px;" src="../../assets/img/appdown.png" alt="">
+        <a href="../../assets/download/deliver.apk" class="thumbnail span1 pull-right">
+          <img alt="100x30" style="width: 100px; height: 35px;" src="../../assets/img/appdown.png" alt="">
         </a>
       </form>
 
       <div class="span4">
         <a href="#" class="thumbnail">
-          <img style="width: 500px; height: 305px;" src="../../assets/img/logo.jpg" alt="">
+          <img style="width: 500px; height: 245px;" src="../../assets/img/logo.jpg" alt="">
         </a>
       </div>
 
 
     </div> <!-- /container -->
-
+    <?php
+      require_once(__DIR__.'/../template/footer.php');
+    ?>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

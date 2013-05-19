@@ -10,14 +10,14 @@ create table if not exists `users` (
     unique (`email`),
     `pass` varchar(40) not null,
     `type` int not null
-);
+) default charset utf8 COLLATE utf8_general_ci;
 
 create table if not exists `groups` (
     `id` int not null auto_increment,
     primary key (`id`),
     `uid` int not null,
     foreign key (`uid`) references `users`(`id`)
-);
+) default charset utf8 COLLATE utf8_general_ci;
 
 create table if not exists `orders` (
     `id` int not null auto_increment,
@@ -31,7 +31,7 @@ create table if not exists `orders` (
     `status` int not null,
     `gid` int,
     foreign key (`gid`) references `groups`(`id`)
-);
+) default charset utf8 COLLATE utf8_general_ci ;
 
 insert into users (name, email, pass, type) values ('李诗剑', 'u1@u', md5('u1'), 0);
 insert into users (name, email, pass, type) values ('瞿钧', 'u2@u', md5('u2'), 0);

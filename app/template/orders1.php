@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Template &middot; Bootstrap</title>
+    <title>外卖哥 - 订单</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -10,10 +10,7 @@
     <!-- Le styles -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
+
 
       /* Custom container */
       .container-narrow {
@@ -144,10 +141,11 @@
               <li class="active"><a href="#">点外卖</a></li>
               <li><a href="#onroad">未完成订单</a></li>
               <li><a href="#finished">已完成订单</a></li>
+              <li><a href="../about/">关于我们</a></li>
             </ul>
             <ul class="nav pull-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user->getName(); ?><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="/hackthon/user/logout">Logout</a></li>
                 </ul>
@@ -222,8 +220,8 @@
         <p>订单描述：{$order->getDescription()}</p>
         <p>送餐地址：{$order->getAddress()}</p>
         <p>联系电话：{$order->getPhone()}</p>
-        <a data-toggle="modal" class="btn" href="../order/{$order->getId()}" data-target="#myModal">查看详情</a>
-        <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <a data-toggle="modal" class="btn" href="../order/{$order->getId()}" data-target="#myModal{$order->getId()}">查看详情</a>
+        <div class="modal hide fade" id="myModal{$order->getId()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-header">
 
             <h3 id="myModalLabel">订单详情</h3>
@@ -249,8 +247,8 @@ c;
         <p>订单描述：{$order->getDescription()}</p>
         <p>送餐地址：{$order->getAddress()}</p>
         <p>联系电话：{$order->getPhone()}</p>
-        <a data-toggle="modal" class="btn" href="../order/{$order->getId()}" data-target="#myModal">查看详情</a>
-        <div class="modal hide fade" id="modal-view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <a data-toggle="modal" class="btn" href="../order/{$order->getId()}" data-target="#myModal{$order->getId()}">查看详情</a>
+        <div class="modal hide fade" id="myModal{$order->getId()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-header">
             <h3 id="myModalLabel">订单详情</h3>
           </div>
@@ -272,9 +270,9 @@ c;
 
       <hr>
 
-      <div class="footer">
-        <p>&copy; eee</p>
-      </div>
+    <?php
+      require_once(__DIR__.'/../template/footer.php');
+    ?>
 
     </div> <!-- /container -->
 
